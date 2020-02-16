@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import api from '../../services/api'
+import api from '../../services/api';
+
+import './styless.css';
 
 
 export default class Main extends Component {
@@ -19,10 +21,15 @@ export default class Main extends Component {
     }
 
     render() { 
+        const { Users } = this.state;
         return(
             <div className="user-list"> 
-                {this.state.Users.map(user => (
-                     <h2>{user.name}</h2>
+                {Users.map(user => (
+                   <article key={user._id}>
+                       <strong>{user.name}</strong>
+                       <p>{user.height}</p>
+                       <a href={user.url}>ler mais</a>
+                   </article>
                 ))} 
             </div>
         )
