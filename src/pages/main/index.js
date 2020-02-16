@@ -3,18 +3,28 @@ import api from '../../services/api'
 
 
 export default class Main extends Component {
+    state = {
+        Users : [], 
+    }
+
     componentDidMount() {
         this.loadUser();
     }
 
     loadUser = async () => {
-        const response = await api.get('/rezendepedro');
+        const response = await api.get('people/');
 
-
-        console.log(response.data);
+        console.log(response.data.results);
+        this.setState({Users: response.data.results}) ;
     }
 
-    render() {
-        return <h1>Hello Atualizador</h1>
+    render() { 
+        return(
+            <div className="user-list"> 
+                {this.state.Users.map(user => (
+                     <h2>{user.name}</h2>
+                ))} 
+            </div>
+        )
     }
 }
